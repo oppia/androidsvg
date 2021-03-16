@@ -45,48 +45,48 @@ publishing {
 
     publications {
 
-        mavenAAR(MavenPublication) {
-            artifactId = artifactIdAAR
-            groupId = group
-
-            artifact("${buildDir}/outputs/aar/androidsvg-release.aar") {
+//        mavenAAR(MavenPublication) {
+//            artifactId = artifactIdAAR
+//            groupId = group
+//
+//            artifact("${buildDir}/outputs/aar/androidsvg-release.aar") {
                 // wrap in a closure because this task isn't defined 'till
                 // the android plugin finishes
-                builtBy { tasks["assembleRelease"] }
-            }
-            afterEvaluate {
-               artifact sourcesJar
+//                builtBy { tasks["assembleRelease"] }
+//            }
+//            afterEvaluate {
+//               artifact sourcesJar
 //               artifact javadocJar
-            }
-
-            pom {
-                packaging = 'aar'
-
-                name = libraryName
-                description = libraryDescription
-                url = siteUrl
-
-                licenses {
-                    license {
-                        name = licenseName
-                        url = licenseUrl
-                        distribution = 'repo'
-                    }
-                }
-                developers {
-                    developer {
-                        id = developerId
-                        name = developerName
-                        email = developerEmail
-                    }
-                }
-                scm {
-                    connection = gitUrl
-                    developerConnection = gitUrl
-                    url = siteUrl
-                }
-            }
-        }
+//            }
+//
+//            pom {
+//                packaging = 'aar'
+//
+//                name = libraryName
+//                description = libraryDescription
+//                url = siteUrl
+//
+//                licenses {
+//                    license {
+//                        name = licenseName
+//                        url = licenseUrl
+//                        distribution = 'repo'
+//                    }
+//                }
+//                developers {
+//                    developer {
+//                        id = developerId
+//                        name = developerName
+//                        email = developerEmail
+//                    }
+//                }
+//                scm {
+//                    connection = gitUrl
+//                    developerConnection = gitUrl
+//                    url = siteUrl
+//                }
+//            }
+//        }
 
         mavenJAR(MavenPublication) {
             artifactId = artifactIdJAR
@@ -94,7 +94,7 @@ publishing {
 
             afterEvaluate {
                artifact libraryJar
-               artifact sourcesJar
+//               artifact sourcesJar
 //               artifact javadocJar
             }
 
