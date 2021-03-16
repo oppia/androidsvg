@@ -17,6 +17,7 @@
 package com.caverock.androidsvg.utils;
 
 import android.graphics.Canvas;
+import android.text.TextPaint;
 
 import com.caverock.androidsvg.PreserveAspectRatio;
 import com.caverock.androidsvg.RenderOptions;
@@ -49,6 +50,7 @@ public class RenderOptionsBase
    SVGBase.Box              viewBox = null;
    String               viewId = null;
    SVGBase.Box              viewPort = null;
+   TextPaint textPaint = null;
 
 
    /**
@@ -85,6 +87,7 @@ public class RenderOptionsBase
       this.viewId = other.viewId;
       this.viewPort = other.viewPort;
       this.targetId = other.targetId;
+      this.textPaint = other.textPaint;
    }
 
    /**
@@ -242,5 +245,23 @@ public class RenderOptionsBase
       return this.targetId != null;
    }
 
+   /**
+    * Updates this {@link RenderOptions} instance to include the specified {@link TextPaint}.
+    *
+    * @return this same <code>RenderOptions</code> instance
+    */
+   public RenderOptionsBase textPaint(TextPaint textPaint)
+   {
+      this.textPaint = textPaint;
+      return this;
+   }
 
+   /**
+    * Returns whether this {@link RenderOptions} instance has a {@link TextPaint} set via {@link
+    * #textPaint(TextPaint)}.
+    */
+   public boolean hasTextPaint()
+   {
+      return textPaint != null;
+   }
 }

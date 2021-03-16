@@ -23,6 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Picture;
 import android.graphics.RectF;
 
+import com.caverock.androidsvg.utils.RenderOptionsBase;
 import com.caverock.androidsvg.utils.SVGBase;
 
 import java.io.IOException;
@@ -563,9 +564,9 @@ public class SVG
     * @throws IllegalArgumentException if there is no current SVG document loaded.
     */
    @SuppressWarnings({"WeakerAccess", "unused"})
-   public float  getDocumentWidth()
+   public float  getDocumentWidth(RenderOptionsBase options)
    {
-      return base.getDocumentWidth();
+      return base.getDocumentWidth(options);
    }
 
 
@@ -611,9 +612,9 @@ public class SVG
     * @throws IllegalArgumentException if there is no current SVG document loaded.
     */
    @SuppressWarnings({"WeakerAccess", "unused"})
-   public float  getDocumentHeight()
+   public float  getDocumentHeight(RenderOptionsBase options)
    {
-      return base.getDocumentWidth();
+      return base.getDocumentHeight(options);
    }
 
 
@@ -726,9 +727,9 @@ public class SVG
     * @throws IllegalArgumentException if there is no current SVG document loaded.
     */
    @SuppressWarnings({"WeakerAccess", "unused"})
-   public float  getDocumentAspectRatio()
+   public float  getDocumentAspectRatio(RenderOptionsBase options)
    {
-      return base.getDocumentAspectRatio();
+      return base.getDocumentAspectRatio(options);
    }
 
 

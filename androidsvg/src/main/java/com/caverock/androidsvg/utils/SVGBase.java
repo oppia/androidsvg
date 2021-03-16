@@ -23,6 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Picture;
 import android.graphics.RectF;
+import android.text.TextPaint;
 import android.util.Log;
 
 import com.caverock.androidsvg.PreserveAspectRatio;
@@ -453,22 +454,22 @@ public class SVGBase
       else if (rootElement.width != null && rootElement.width.unit != Unit.percent &&
                rootElement.height != null && rootElement.height.unit != Unit.percent)
       {
-         float w = rootElement.width.floatValue(this.renderDPI);
-         float h = rootElement.height.floatValue(this.renderDPI);
+         float w = rootElement.width.floatValue(this.renderDPI, renderOptions);
+         float h = rootElement.height.floatValue(this.renderDPI, renderOptions);
          return renderToPicture( (int) Math.ceil(w), (int) Math.ceil(h), renderOptions );
       }
       else if (rootElement.width != null && viewBox != null)
       {
          // Width and viewBox supplied, but no height
          // Determine the Picture size and initial viewport. See SVG spec section 7.12.
-         float  w = rootElement.width.floatValue(this.renderDPI);
+         float  w = rootElement.width.floatValue(this.renderDPI, renderOptions);
          float  h = w * viewBox.height / viewBox.width;
          return renderToPicture( (int) Math.ceil(w), (int) Math.ceil(h), renderOptions );
       }
       else if (rootElement.height != null && viewBox != null)
       {
          // Height and viewBox supplied, but no width
-         float  h = rootElement.height.floatValue(this.renderDPI);
+         float  h = rootElement.height.floatValue(this.renderDPI, renderOptions);
          float  w = h * viewBox.width / viewBox.height;
          return renderToPicture( (int) Math.ceil(w), (int) Math.ceil(h), renderOptions );
       }
@@ -747,12 +748,12 @@ public class SVGBase
     * @throws IllegalArgumentException if there is no current SVG document loaded.
     */
    @SuppressWarnings({"WeakerAccess", "unused"})
-   public float  getDocumentWidth()
+   public float  getDocumentWidth(RenderOptionsBase options)
    {
       if (this.rootElement == null)
          throw new IllegalArgumentException("SVG document is empty");
 
-      return getDocumentDimensions(this.renderDPI).width;
+      return getDocumentDimensions(this.renderDPI, options).width;
    }
 
 
@@ -804,12 +805,12 @@ public class SVGBase
     * @throws IllegalArgumentException if there is no current SVG document loaded.
     */
    @SuppressWarnings({"WeakerAccess", "unused"})
-   public float  getDocumentHeight()
+   public float  getDocumentHeight(RenderOptionsBase options)
    {
       if (this.rootElement == null)
          throw new IllegalArgumentException("SVG document is empty");
 
-      return getDocumentDimensions(this.renderDPI).height;
+      return getDocumentDimensions(this.renderDPI, options).height;
    }
 
 
@@ -946,7 +947,7 @@ public class SVGBase
     * @throws IllegalArgumentException if there is no current SVG document loaded.
     */
    @SuppressWarnings({"WeakerAccess", "unused"})
-   public float  getDocumentAspectRatio()
+   public float  getDocumentAspectRatio(RenderOptionsBase options)
    {
       if (this.rootElement == null)
          throw new IllegalArgumentException("SVG document is empty");
@@ -959,7 +960,7 @@ public class SVGBase
       {
          if (w.isZero() || h.isZero())
             return -1f;
-         return w.floatValue(this.renderDPI) / h.floatValue(this.renderDPI);
+         return w.floatValue(this.renderDPI, options) / h.floatValue(this.renderDPI, options);
       }
 
       // Otherwise, get the ratio from the viewBox
@@ -1028,8 +1029,7 @@ public class SVGBase
       return str.replace("\\\n", "").replace("\\A", "\n");
    }
 
-
-   private Box  getDocumentDimensions(float dpi)
+   private Box  getDocumentDimensions(float dpi, RenderOptionsBase options)
    {
       Length  w = this.rootElement.width;
       Length  h = this.rootElement.height;
@@ -1037,14 +1037,14 @@ public class SVGBase
       if (w == null || w.isZero() || w.unit== Unit.percent || w.unit== Unit.em || w.unit== Unit.ex)
          return new Box(-1,-1,-1,-1);
 
-      float  wOut = w.floatValue(dpi);
+      float  wOut = w.floatValue(dpi, options);
       float  hOut;
 
       if (h != null) {
          if (h.isZero() || h.unit== Unit.percent || h.unit== Unit.em || h.unit== Unit.ex) {
             return new Box(-1,-1,-1,-1);
          }
-         hOut = h.floatValue(dpi);
+         hOut = h.floatValue(dpi, options);
       } else {
          // height is not specified. SVG spec says this is okay. If there is a viewBox, we use
          // that to calculate the height. Otherwise we set height equal to width.
@@ -1295,9 +1295,13 @@ public class SVGBase
          return floatValueX(renderer);
       }
 
+      float floatValue(float dpi, RenderOptionsBase renderOptions) {
+         return floatValue(dpi, renderOptions.textPaint);
+      }
+
       // For situations (like calculating the initial viewport) when we can only rely on
       // physical real world units.
-      float floatValue(float dpi)
+      float floatValue(float dpi, TextPaint textPaint)
       {
          switch (unit)
          {
@@ -1311,9 +1315,12 @@ public class SVGBase
                return value * dpi / 72f;
             case pc: // 1 pica = 1/6 in
                return value * dpi / 6f;
-            case px:
             case em:
+               return textPaint.getTextSize() * value;
             case ex:
+               // The CSS3 spec says to use 0.5em if there is no way to determine true x-height;
+               return textPaint.getTextSize() * value * 0.5f;
+            case px:
             case percent:
             default:
                return value;

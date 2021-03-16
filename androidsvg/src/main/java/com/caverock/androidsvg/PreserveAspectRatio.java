@@ -20,6 +20,7 @@ import com.caverock.androidsvg.utils.TextScanner;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * The PreserveAspectRatio class tells the renderer how to scale and position the
@@ -276,8 +277,10 @@ public class PreserveAspectRatio
       return alignment + " " + scale;
    }
 
-
-
+   @Override
+   public int hashCode() {
+      return Objects.hash(alignment, scale);
+   }
 
    private static PreserveAspectRatio  parsePreserveAspectRatio(String val) throws SVGParseException
    {

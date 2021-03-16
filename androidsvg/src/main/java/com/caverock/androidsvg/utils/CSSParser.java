@@ -18,7 +18,7 @@ package com.caverock.androidsvg.utils;
 
 import android.util.Log;
 
-import com.caverock.androidsvg.BuildConfig;
+//import com.caverock.androidsvg.BuildConfig;
 import com.caverock.androidsvg.SVGExternalFileResolver;
 import com.caverock.androidsvg.utils.SVGBase.SvgContainer;
 import com.caverock.androidsvg.utils.SVGBase.SvgElementBase;
@@ -580,8 +580,8 @@ public class CSSParser
       catch (CSSParseException e)
       {
          Log.e(TAG, "CSS parser terminated early due to error: " + e.getMessage());
-         if (BuildConfig.DEBUG)
-            Log.e(TAG,"Stacktrace:", e);
+//         if (BuildConfig.DEBUG)
+//            Log.e(TAG,"Stacktrace:", e);
       }
       return ruleset;
    }

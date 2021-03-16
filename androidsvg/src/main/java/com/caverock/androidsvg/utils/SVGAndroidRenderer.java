@@ -20,7 +20,7 @@ package com.caverock.androidsvg.utils;
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BlendMode;
+//import android.graphics.BlendMode;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -38,10 +38,11 @@ import android.graphics.Shader;
 import android.graphics.Shader.TileMode;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.text.TextPaint;
 import android.util.Base64;
 import android.util.Log;
 
-import com.caverock.androidsvg.BuildConfig;
+//import com.caverock.androidsvg.BuildConfig;
 import com.caverock.androidsvg.PreserveAspectRatio;
 import com.caverock.androidsvg.SVGExternalFileResolver;
 import com.caverock.androidsvg.utils.SVGBase.Box;
@@ -89,7 +90,7 @@ import com.caverock.androidsvg.utils.SVGBase.TextSequence;
 import com.caverock.androidsvg.utils.SVGBase.Unit;
 import com.caverock.androidsvg.utils.SVGBase.Use;
 import com.caverock.androidsvg.utils.SVGBase.View;
-import com.caverock.androidsvg.utils.Style.CSSBlendMode;
+//import com.caverock.androidsvg.utils.Style.CSSBlendMode;
 import com.caverock.androidsvg.utils.Style.FontStyle;
 import com.caverock.androidsvg.utils.Style.Isolation;
 import com.caverock.androidsvg.utils.Style.RenderQuality;
@@ -120,8 +121,8 @@ public class SVGAndroidRenderer
    private static final boolean  SUPPORTS_PAINT_FONT_FEATURE_SETTINGS = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
    private static final boolean  SUPPORTS_PAINT_LETTER_SPACING = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
    private static final boolean  SUPPORTS_PAINT_FONT_VARIATION_SETTINGS = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
-   private static final boolean  SUPPORTS_BLEND_MODE = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;          // Android 10
-   private static final boolean  SUPPORTS_PAINT_WORD_SPACING = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
+//   private static final boolean  SUPPORTS_BLEND_MODE = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;          // Android 10
+//   private static final boolean  SUPPORTS_PAINT_WORD_SPACING = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
 
 
    private final Canvas   canvas;
@@ -164,13 +165,14 @@ public class SVGAndroidRenderer
 
       final Paint    fillPaint;
       final Paint    strokePaint;
+      final TextPaint textPaint;
 
       final CSSFontFeatureSettings    fontFeatureSet;
       final CSSFontVariationSettings  fontVariationSet;
 
 
       @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-      RendererState()
+      RendererState(TextPaint textPaint)
       {
          fillPaint = new Paint();
          fillPaint.setFlags(Paint.ANTI_ALIAS_FLAG | Paint.LINEAR_TEXT_FLAG | Paint.SUBPIXEL_TEXT_FLAG);
@@ -188,6 +190,18 @@ public class SVGAndroidRenderer
          strokePaint.setStyle(Paint.Style.STROKE);
          strokePaint.setTypeface(Typeface.DEFAULT);
 
+         if (textPaint == null)
+         {
+            textPaint = new TextPaint();
+            textPaint.setFlags(Paint.ANTI_ALIAS_FLAG | Paint.LINEAR_TEXT_FLAG | Paint.SUBPIXEL_TEXT_FLAG);
+            if (SUPPORTS_FONT_HINTING) {
+               strokePaint.setHinting(Paint.HINTING_OFF);
+            }
+            textPaint.setStyle(Paint.Style.STROKE);
+            textPaint.setTypeface(Typeface.DEFAULT);
+         }
+         this.textPaint = textPaint;
+
          fontFeatureSet = new CSSFontFeatureSettings();
          fontVariationSet = new CSSFontVariationSettings();
 
@@ -200,6 +214,7 @@ public class SVGAndroidRenderer
          hasStroke = copy.hasStroke;
          fillPaint = new Paint(copy.fillPaint);
          strokePaint = new Paint(copy.strokePaint);
+         textPaint = new TextPaint(copy.textPaint);
          if (copy.viewPort != null)
             viewPort = new Box(copy.viewPort);
          if (copy.viewBox != null)
@@ -221,9 +236,9 @@ public class SVGAndroidRenderer
    }
 
 
-   private void  resetState()
+   private void  resetState(RenderOptionsBase renderOptions)
    {
-      state = new RendererState();
+      state = new RendererState(renderOptions.textPaint);
       stateStack = new Stack<>();
 
       // Initialise the style state properties like Paints etc using a fresh instance of Style
@@ -267,14 +282,14 @@ public class SVGAndroidRenderer
 
    float  getCurrentFontSize()
    {
-      return state.fillPaint.getTextSize();
+      return state.textPaint.getTextSize();
    }
 
 
    float  getCurrentFontXHeight()
    {
       // The CSS3 spec says to use 0.5em if there is no way to determine true x-height;
-      return state.fillPaint.getTextSize() / 2f;
+      return state.textPaint.getTextSize() / 2f;
    }
 
 
@@ -345,7 +360,7 @@ public class SVGAndroidRenderer
       }
 
       // Initialise the state
-      resetState();
+      resetState(renderOptions);
 
       checkXMLSpaceAttribute(rootObj);
 
@@ -609,8 +624,8 @@ public class SVGAndroidRenderer
 
    private static void  debug(String format, Object... args)
    {
-      if (BuildConfig.DEBUG)
-         Log.d(TAG, String.format(format, args));
+//      if (BuildConfig.DEBUG)
+//         Log.d(TAG, String.format(format, args));
    }
 
 
@@ -799,9 +814,9 @@ public class SVGAndroidRenderer
       // Custom version of statePush() that also saves the layer
       Paint  savePaint = new Paint();
       savePaint.setAlpha(clamp255(state.style.opacity * opacityAdjustment));
-      if (SUPPORTS_BLEND_MODE && state.style.mixBlendMode != CSSBlendMode.normal) {
-         setBlendMode(savePaint);
-      }
+//      if (SUPPORTS_BLEND_MODE && state.style.mixBlendMode != CSSBlendMode.normal) {
+//         setBlendMode(savePaint);
+//      }
       canvas.saveLayer(null, savePaint, Canvas.ALL_SAVE_FLAG);
 
       // Save style state
@@ -890,39 +905,39 @@ public class SVGAndroidRenderer
    {
       return (state.style.opacity < 1.0f) ||
              (state.style.mask != null) ||
-             (state.style.isolation == Isolation.isolate) ||
-             (SUPPORTS_BLEND_MODE && state.style.mixBlendMode != CSSBlendMode.normal);
+             (state.style.isolation == Isolation.isolate);// ||
+//             (SUPPORTS_BLEND_MODE && state.style.mixBlendMode != CSSBlendMode.normal);
    }
 
 
-   @TargetApi(Build.VERSION_CODES.Q)
-   private void  setBlendMode(Paint paint)
-   {
-      debug("Setting blend mode to "+state.style.mixBlendMode);
-      switch (state.style.mixBlendMode)
-      {
-         case multiply:    paint.setBlendMode(BlendMode.MULTIPLY); break;
-         case screen:      paint.setBlendMode(BlendMode.SCREEN); break;
-         case overlay:     paint.setBlendMode(BlendMode.OVERLAY); break;
-         case darken:      paint.setBlendMode(BlendMode.DARKEN); break;
-         case lighten:     paint.setBlendMode(BlendMode.LIGHTEN); break;
-         case color_dodge: paint.setBlendMode(BlendMode.COLOR_DODGE); break;
-         case color_burn:  paint.setBlendMode(BlendMode.COLOR_BURN); break;
-         case hard_light:  paint.setBlendMode(BlendMode.HARD_LIGHT); break;
-         case soft_light:  paint.setBlendMode(BlendMode.SOFT_LIGHT); break;
-         case difference:  paint.setBlendMode(BlendMode.DIFFERENCE); break;
-         case exclusion:   paint.setBlendMode(BlendMode.EXCLUSION); break;
-         case hue:         paint.setBlendMode(BlendMode.HUE); break;
-         case saturation:  paint.setBlendMode(BlendMode.SATURATION); break;
-         case color:       paint.setBlendMode(BlendMode.COLOR); break;
-         case luminosity:  paint.setBlendMode(BlendMode.LUMINOSITY); break;
-         case normal:
-         default: paint.setBlendMode(null); break;
-      }
-   }
+//   @TargetApi(Build.VERSION_CODES.Q)
+//   private void  setBlendMode(Paint paint)
+//   {
+//      debug("Setting blend mode to "+state.style.mixBlendMode);
+//      switch (state.style.mixBlendMode)
+//      {
+//         case multiply:    paint.setBlendMode(BlendMode.MULTIPLY); break;
+//         case screen:      paint.setBlendMode(BlendMode.SCREEN); break;
+//         case overlay:     paint.setBlendMode(BlendMode.OVERLAY); break;
+//         case darken:      paint.setBlendMode(BlendMode.DARKEN); break;
+//         case lighten:     paint.setBlendMode(BlendMode.LIGHTEN); break;
+//         case color_dodge: paint.setBlendMode(BlendMode.COLOR_DODGE); break;
+//         case color_burn:  paint.setBlendMode(BlendMode.COLOR_BURN); break;
+//         case hard_light:  paint.setBlendMode(BlendMode.HARD_LIGHT); break;
+//         case soft_light:  paint.setBlendMode(BlendMode.SOFT_LIGHT); break;
+//         case difference:  paint.setBlendMode(BlendMode.DIFFERENCE); break;
+//         case exclusion:   paint.setBlendMode(BlendMode.EXCLUSION); break;
+//         case hue:         paint.setBlendMode(BlendMode.HUE); break;
+//         case saturation:  paint.setBlendMode(BlendMode.SATURATION); break;
+//         case color:       paint.setBlendMode(BlendMode.COLOR); break;
+//         case luminosity:  paint.setBlendMode(BlendMode.LUMINOSITY); break;
+//         case normal:
+//         default: paint.setBlendMode(null); break;
+//      }
+//   }
 
 
-   //==============================================================================
+//   ==============================================================================
 
 
    /*
@@ -2446,6 +2461,7 @@ public class SVGAndroidRenderer
          state.style.fontSize = style.fontSize;
          state.fillPaint.setTextSize(style.fontSize.floatValue(this, currentFontSize));
          state.strokePaint.setTextSize(style.fontSize.floatValue(this, currentFontSize));
+         state.textPaint.setTextSize(style.fontSize.floatValue(this, currentFontSize));
       }
 
       if (isSpecified(style, Style.SPECIFIED_FONT_FAMILY))
@@ -2676,10 +2692,10 @@ public class SVGAndroidRenderer
       if (isSpecified(style, Style.SPECIFIED_WORD_SPACING))
       {
          state.style.wordSpacing = style.wordSpacing;
-         if (SUPPORTS_PAINT_WORD_SPACING) {
-            state.fillPaint.setWordSpacing(style.wordSpacing.floatValue(this));
-            state.strokePaint.setWordSpacing(style.wordSpacing.floatValue(this));
-         }
+//         if (SUPPORTS_PAINT_WORD_SPACING) {
+//            state.fillPaint.setWordSpacing(style.wordSpacing.floatValue(this));
+//            state.strokePaint.setWordSpacing(style.wordSpacing.floatValue(this));
+//         }
       }
 
    }
@@ -3390,7 +3406,7 @@ public class SVGAndroidRenderer
          }
       }
       // Calculate units scale
-      unitsScale = marker.markerUnitsAreUser ? 1f : state.style.strokeWidth.floatValue(dpi);
+      unitsScale = marker.markerUnitsAreUser ? 1f : state.style.strokeWidth.floatValue(dpi, state.textPaint);
 
       // "Properties inherit into the <marker> element from its ancestors; properties do not
       // inherit from the element referencing the <marker> element." (sect 11.6.2)
@@ -3505,7 +3521,7 @@ public class SVGAndroidRenderer
     */
    private RendererState  findInheritFromAncestorState(SvgObject obj)
    {
-      RendererState newState = new RendererState();
+      RendererState newState = new RendererState(state.textPaint);
       updateStyle(newState, Style.getDefaultStyle());
       return findInheritFromAncestorState(obj, newState);
    }
@@ -4687,7 +4703,7 @@ public class SVGAndroidRenderer
       canvas.clipPath(path);
 
       // Set the style for the pattern (inherits from its own ancestors, not from callee's state)
-      RendererState  baseState = new RendererState();
+      RendererState  baseState = new RendererState(state.textPaint);
       updateStyle(baseState, Style.getDefaultStyle());
       baseState.style.overflow = false;    // By default patterns do not overflow
 

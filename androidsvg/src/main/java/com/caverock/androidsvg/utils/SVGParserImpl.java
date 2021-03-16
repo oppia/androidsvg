@@ -20,7 +20,7 @@ import android.graphics.Matrix;
 import android.util.Log;
 import android.util.Xml;
 
-import com.caverock.androidsvg.BuildConfig;
+//import com.caverock.androidsvg.BuildConfig;
 import com.caverock.androidsvg.PreserveAspectRatio;
 import com.caverock.androidsvg.SVGExternalFileResolver;
 import com.caverock.androidsvg.SVGParseException;
@@ -1158,8 +1158,8 @@ class SVGParserImpl implements SVGParser
    private void  endDocument()
    {
       // Dump document
-      if (BuildConfig.DEBUG)
-         dumpNode(svgDocument.getRootElement(), "");
+//      if (BuildConfig.DEBUG)
+//         dumpNode(svgDocument.getRootElement(), "");
    }
 
 
@@ -1219,22 +1219,22 @@ class SVGParserImpl implements SVGParser
 
    private void  dumpNode(SVGBase.SvgObject elem, String indent)
    {
-      if (!BuildConfig.DEBUG)
-         return;
-      Log.d(TAG, indent+elem);
-      if (elem instanceof SVGBase.SvgConditionalContainer) {
-         indent = indent+"  ";
-         for (SVGBase.SvgObject child: ((SVGBase.SvgConditionalContainer) elem).children) {
-            dumpNode(child, indent);
-         }
-      }
+//      if (!BuildConfig.DEBUG)
+//         return;
+//      Log.d(TAG, indent+elem);
+//      if (elem instanceof SVGBase.SvgConditionalContainer) {
+//         indent = indent+"  ";
+//         for (SVGBase.SvgObject child: ((SVGBase.SvgConditionalContainer) elem).children) {
+//            dumpNode(child, indent);
+//         }
+//      }
    }
 
 
    private void  debug(String format, Object... args)
    {
-      if (BuildConfig.DEBUG)
-         Log.d(TAG, String.format(format, args));
+//      if (BuildConfig.DEBUG)
+//         Log.d(TAG, String.format(format, args));
    }
 
 
