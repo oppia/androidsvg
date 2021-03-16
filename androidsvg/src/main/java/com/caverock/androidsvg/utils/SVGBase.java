@@ -1296,7 +1296,11 @@ public class SVGBase
       }
 
       float floatValue(float dpi, RenderOptionsBase renderOptions) {
-         return floatValue(dpi, renderOptions.textPaint);
+         TextPaint textPaint = null;
+         if (renderOptions != null) {
+            textPaint = renderOptions.textPaint;
+         }
+         return floatValue(dpi, textPaint);
       }
 
       // For situations (like calculating the initial viewport) when we can only rely on
@@ -1316,10 +1320,10 @@ public class SVGBase
             case pc: // 1 pica = 1/6 in
                return value * dpi / 6f;
             case em:
-               return textPaint.getTextSize() * value;
+               return textPaint != null ? textPaint.getTextSize() * value : value;
             case ex:
                // The CSS3 spec says to use 0.5em if there is no way to determine true x-height;
-               return textPaint.getTextSize() * value * 0.5f;
+               return textPaint != null ? textPaint.getTextSize() * value * 0.5f : value;
             case px:
             case percent:
             default:
