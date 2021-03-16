@@ -1044,7 +1044,10 @@ public class SVGBase
       float  hOut;
 
       if (h != null) {
-         if (h.isZero() || h.unit== Unit.percent || h.unit== Unit.em || h.unit== Unit.ex) {
+         if (h.isZero() || h.unit== Unit.percent) {
+            return new Box(-1,-1,-1,-1);
+         }
+         if (options == null && (h.unit== Unit.em || h.unit== Unit.ex)) {
             return new Box(-1,-1,-1,-1);
          }
          hOut = h.floatValue(dpi, options);
