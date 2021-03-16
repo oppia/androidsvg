@@ -2461,7 +2461,6 @@ public class SVGAndroidRenderer
          state.style.fontSize = style.fontSize;
          state.fillPaint.setTextSize(style.fontSize.floatValue(this, currentFontSize));
          state.strokePaint.setTextSize(style.fontSize.floatValue(this, currentFontSize));
-         state.textPaint.setTextSize(style.fontSize.floatValue(this, currentFontSize));
       }
 
       if (isSpecified(style, Style.SPECIFIED_FONT_FAMILY))

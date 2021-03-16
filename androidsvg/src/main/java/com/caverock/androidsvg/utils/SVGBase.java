@@ -1034,7 +1034,10 @@ public class SVGBase
       Length  w = this.rootElement.width;
       Length  h = this.rootElement.height;
       
-      if (w == null || w.isZero() || w.unit== Unit.percent || w.unit== Unit.em || w.unit== Unit.ex)
+      if (w == null || w.isZero() || w.unit== Unit.percent)
+         return new Box(-1,-1,-1,-1);
+
+      if (options == null && (w.unit== Unit.em || w.unit== Unit.ex))
          return new Box(-1,-1,-1,-1);
 
       float  wOut = w.floatValue(dpi, options);
