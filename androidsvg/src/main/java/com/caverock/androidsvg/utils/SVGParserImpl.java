@@ -3997,9 +3997,6 @@ class SVGParserImpl implements SVGParser
             case media:
                media = val;
                break;
-            case vertical_align:
-               svgDocument.setVerticalAlignment(parseLength(val));
-               break;
             default:
                break;
          }

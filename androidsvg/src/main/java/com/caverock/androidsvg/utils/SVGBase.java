@@ -114,8 +114,6 @@ public class SVGBase
    // Map from id attribute to element
    private final Map<String, SvgElementBase> idToElementMap = new HashMap<>();
 
-   private Length verticalAlignment = null;
-
    enum Unit
    {
       px,
@@ -851,11 +849,9 @@ public class SVGBase
 
    public float getVerticalAlignment(RenderOptionsBase options)
    {
-      if (verticalAlignment == null)
-      {
-         return 0;
-      }
-      return verticalAlignment.floatValue(this.renderDPI, options);
+      if (this.rootElement == null)
+         throw new IllegalArgumentException("SVG document is empty");
+      return this.rootElement.style.verticalAlignment.floatValue(this.renderDPI, options);
    }
 
    /**
@@ -1081,12 +1077,6 @@ public class SVGBase
    {
       this.cssRules.addAll(ruleset);
    }
-
-   void setVerticalAlignment(Length verticalAlignment)
-   {
-      this.verticalAlignment = verticalAlignment;
-   }
-
 
    List<CSSParser.Rule>  getCSSRules()
    {

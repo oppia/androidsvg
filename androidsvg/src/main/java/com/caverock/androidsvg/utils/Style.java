@@ -108,6 +108,8 @@ public class  Style implements Cloneable
    Length     letterSpacing;
    Length     wordSpacing;
 
+   Length verticalAlignment;
+
 
    static final float  FONT_WEIGHT_MIN = 1f;
    static final float  FONT_WEIGHT_NORMAL = 400f;
@@ -174,6 +176,7 @@ public class  Style implements Cloneable
    static final long SPECIFIED_FONT_STRETCH               = (1L<<51);
    static final long SPECIFIED_LETTER_SPACING             = (1L<<52);
    static final long SPECIFIED_WORD_SPACING               = (1L<<53);
+   static final long SPECIFIED_VERTICAL_ALIGNMENT         = (1L<<54);
 
    // Flags for the settings that are applied to reset the root style
    private static final long SPECIFIED_RESET = 0xffffffffffffffffL &
@@ -393,6 +396,7 @@ public class  Style implements Cloneable
       def.fontVariationSettings = null;
       def.letterSpacing = Length.ZERO;
       def.wordSpacing = Length.ZERO;
+      def.verticalAlignment = Length.ZERO;
       def.writingMode = WritingMode.horizontal_tb;
       def.glyphOrientationVertical = GlypOrientationVertical.auto;
       def.textOrientation = TextOrientation.mixed;
@@ -813,6 +817,15 @@ public class  Style implements Cloneable
             if (style.wordSpacing != null)
                style.specifiedFlags |= SPECIFIED_WORD_SPACING;
             break;
+
+         case vertical_align:
+            try {
+               style.verticalAlignment = SVGParserImpl.parseLength(val);
+            } catch (SVGParseException ignored) {}
+            if (style.verticalAlignment != null)
+               style.specifiedFlags |= SPECIFIED_VERTICAL_ALIGNMENT;
+            break;
+
 
          /*
          case writing_mode:
