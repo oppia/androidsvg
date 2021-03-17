@@ -851,6 +851,10 @@ public class SVGBase
 
    public float getVerticalAlignment(RenderOptionsBase options)
    {
+      if (verticalAlignment == null)
+      {
+         return 0;
+      }
       return verticalAlignment.floatValue(this.renderDPI, options);
    }
 
