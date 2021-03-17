@@ -646,9 +646,9 @@ public class SVG
       base.setDocumentHeight(value);
    }
 
-   public SVGBase.Length getVerticalAlignment()
+   public float getVerticalAlignment(RenderOptionsBase options)
    {
-      return base.getVerticalAlignment();
+      return base.getVerticalAlignment(options);
    }
 
    /**
@@ -662,7 +662,7 @@ public class SVG
     * <p>
     * By setting a viewBox that describes only a portion of the document,
     * you can reproduce the effect of image sprites.
-    * 
+    *
     * @param minX the left coordinate of the viewBox in pixels
     * @param minY the top coordinate of the viewBox in pixels.
     * @param width the width of the viewBox in pixels

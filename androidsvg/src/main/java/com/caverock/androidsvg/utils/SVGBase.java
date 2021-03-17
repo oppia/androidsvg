@@ -849,9 +849,9 @@ public class SVGBase
       this.rootElement.height = SVGParserImpl.parseLength(value);
    }
 
-   public SVGBase.Length getVerticalAlignment()
+   public float getVerticalAlignment(RenderOptionsBase options)
    {
-      return verticalAlignment;
+      return verticalAlignment.floatValue(this.renderDPI, options);
    }
 
    /**
