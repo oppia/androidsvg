@@ -646,6 +646,10 @@ public class SVG
       base.setDocumentHeight(value);
    }
 
+   public SVGBase.Length getVerticalAlignment()
+   {
+      return base.getVerticalAlignment();
+   }
 
    /**
     * Change the document view box by altering the "viewBox" attribute

@@ -114,6 +114,7 @@ public class SVGBase
    // Map from id attribute to element
    private final Map<String, SvgElementBase> idToElementMap = new HashMap<>();
 
+   private Length verticalAlignment = null;
 
    enum Unit
    {
@@ -848,6 +849,10 @@ public class SVGBase
       this.rootElement.height = SVGParserImpl.parseLength(value);
    }
 
+   public SVGBase.Length getVerticalAlignment()
+   {
+      return verticalAlignment;
+   }
 
    /**
     * Change the document view box by altering the "viewBox" attribute
@@ -1071,6 +1076,11 @@ public class SVGBase
    void  addCSSRules(Ruleset ruleset)
    {
       this.cssRules.addAll(ruleset);
+   }
+
+   void setVerticalAlignment(Length verticalAlignment)
+   {
+      this.verticalAlignment = verticalAlignment;
    }
 
 

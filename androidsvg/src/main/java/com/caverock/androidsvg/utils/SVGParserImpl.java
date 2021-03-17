@@ -288,6 +288,7 @@ class SVGParserImpl implements SVGParser
       mask,
       maskContentUnits, maskUnits,
       media,
+      vertical_align,
       mix_blend_mode,  // @since 1.5
       offset,
       opacity,
@@ -3995,6 +3996,9 @@ class SVGParserImpl implements SVGParser
                break;
             case media:
                media = val;
+               break;
+            case vertical_align:
+               svgDocument.setVerticalAlignment(parseLength(val));
                break;
             default:
                break;
