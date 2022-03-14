@@ -472,6 +472,14 @@ public class SVGBase
          float  w = h * viewBox.width / viewBox.height;
          return renderToPicture( (int) Math.ceil(w), (int) Math.ceil(h), renderOptions );
       }
+      else if (renderOptions == null && viewBox != null)
+      {
+         RectF viewRect = viewBox.toRectF();
+         float width = viewRect.width();
+         float height = viewRect.height();
+         // The only reference frame for the picture's size is its viewbox dimensions.
+         return renderToPicture((int) width, (int) height, renderOptions);
+      }
       else
       {
          return renderToPicture(DEFAULT_PICTURE_WIDTH, DEFAULT_PICTURE_HEIGHT, renderOptions);
@@ -1100,7 +1108,7 @@ public class SVGBase
    // Object sub-types used in the SVG object tree
 
 
-   static class  Box
+   static class Box
    {
       float  minX, minY, width, height;
 
