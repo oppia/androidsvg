@@ -24,15 +24,15 @@ import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Set;
 
-import android.annotation.TargetApi;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.Typeface.Builder;
 import android.os.Build;
-import android.text.TextUtils;
 import android.util.Log;
+
+import com.caverock.androidsvg.loader.SVGExternalFileResolver;
 
 
 /**
@@ -40,7 +40,7 @@ import android.util.Log;
  * an application's "assets" folder.
  */
 
-public class SimpleAssetResolver extends SVGExternalFileResolver
+public class SimpleAssetResolver implements SVGExternalFileResolver
 {
    private static final String  TAG = "SimpleAssetResolver";
 

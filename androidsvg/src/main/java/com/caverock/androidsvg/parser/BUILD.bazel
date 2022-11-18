@@ -1,0 +1,83 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+java_library(
+    name = "parser",
+    srcs = [
+        "SVGParser.java",
+        "SVGParserFactoryImpl.java",
+        "SVGParserImpl.java",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":exceptions",
+        ":integer_parser",
+        ":number_parser",
+        ":parser_helper",
+        ":text_scanner",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/loader:css_resolver",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/model",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/util:logger",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/xml:xml_parser",
+    ],
+)
+
+java_library(
+    name = "parser_helper",
+    srcs = [
+        "CSSParser.java",
+        "CSSTextScanner.java",
+        "ParserHelper.java",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":exceptions",
+        ":integer_parser",
+        ":number_parser",
+        ":text_scanner",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/loader:css_resolver",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/model",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/util:logger",
+    ],
+)
+
+java_library(
+    name = "text_scanner",
+    srcs = [
+        "TextScanner.java",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":integer_parser",
+        ":number_parser",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/model",
+    ],
+)
+
+java_library(
+    name = "integer_parser",
+    srcs = [
+        "IntegerParser.java",
+    ],
+    deps = [
+        "//androidsvg/src/main/java/com/caverock/androidsvg/model",
+    ],
+)
+
+java_library(
+    name = "number_parser",
+    srcs = [
+        "NumberParser.java",
+    ],
+    deps = [
+        "//androidsvg/src/main/java/com/caverock/androidsvg/model",
+    ],
+)
+
+java_library(
+    name = "exceptions",
+    srcs = [
+        "CSSParseException.java",
+        "SVGParseException.java",
+    ],
+    visibility = ["//visibility:public"],
+)

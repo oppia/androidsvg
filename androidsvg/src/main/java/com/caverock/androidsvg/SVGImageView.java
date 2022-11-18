@@ -34,6 +34,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.caverock.androidsvg.androidrendering.RenderOptions;
+import com.caverock.androidsvg.androidrendering.SVG;
+import com.caverock.androidsvg.parser.SVGParseException;
+
 /**
  * SVGImageView is a View widget that allows users to include SVG images in their layouts.
  * 
@@ -50,7 +54,7 @@ import android.widget.ImageView;
 public class SVGImageView extends ImageView
 {
    private SVG                  svg = null;
-   private final RenderOptions  renderOptions = new RenderOptions();
+   private final RenderOptions renderOptions = new RenderOptions();
 
    private static Method  setLayerTypeMethod = null;
 

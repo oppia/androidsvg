@@ -1,0 +1,14 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+java_library(
+    name = "css_resolver",
+    srcs = ["CssResolver.java"],
+    visibility = ["//visibility:public"],
+)
+
+android_library(
+    name = "svg_external_file_resolver",
+    srcs = ["SVGExternalFileResolver.java"],
+    visibility = ["//visibility:public"],
+    deps = [":css_resolver"],
+)

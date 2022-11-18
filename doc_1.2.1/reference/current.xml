@@ -10,19 +10,19 @@
  visibility="public"
 >
 <constructor name="PreserveAspectRatio"
- type="com.caverock.androidsvg.PreserveAspectRatio"
+ type="com.caverock.androidsvg.model.PreserveAspectRatio"
  static="false"
  final="false"
  deprecated="not deprecated"
  visibility="public"
 >
-<parameter name="alignment" type="com.caverock.androidsvg.PreserveAspectRatio.Alignment">
+<parameter name="alignment" type="com.caverock.androidsvg.model.PreserveAspectRatio.Alignment">
 </parameter>
-<parameter name="scale" type="com.caverock.androidsvg.PreserveAspectRatio.Scale">
+<parameter name="scale" type="com.caverock.androidsvg.model.PreserveAspectRatio.Scale">
 </parameter>
 </constructor>
 <method name="getAlignment"
- return="com.caverock.androidsvg.PreserveAspectRatio.Alignment"
+ return="com.caverock.androidsvg.model.PreserveAspectRatio.Alignment"
  abstract="false"
  native="false"
  synchronized="false"
@@ -33,7 +33,7 @@
 >
 </method>
 <method name="getScale"
- return="com.caverock.androidsvg.PreserveAspectRatio.Scale"
+ return="com.caverock.androidsvg.model.PreserveAspectRatio.Scale"
  abstract="false"
  native="false"
  synchronized="false"
@@ -44,7 +44,7 @@
 >
 </method>
 <field name="BOTTOM"
- type="com.caverock.androidsvg.PreserveAspectRatio"
+ type="com.caverock.androidsvg.model.PreserveAspectRatio"
  transient="false"
  volatile="false"
  static="true"
@@ -54,7 +54,7 @@
 >
 </field>
 <field name="END"
- type="com.caverock.androidsvg.PreserveAspectRatio"
+ type="com.caverock.androidsvg.model.PreserveAspectRatio"
  transient="false"
  volatile="false"
  static="true"
@@ -64,7 +64,7 @@
 >
 </field>
 <field name="FULLSCREEN"
- type="com.caverock.androidsvg.PreserveAspectRatio"
+ type="com.caverock.androidsvg.model.PreserveAspectRatio"
  transient="false"
  volatile="false"
  static="true"
@@ -74,7 +74,7 @@
 >
 </field>
 <field name="FULLSCREEN_START"
- type="com.caverock.androidsvg.PreserveAspectRatio"
+ type="com.caverock.androidsvg.model.PreserveAspectRatio"
  transient="false"
  volatile="false"
  static="true"
@@ -84,7 +84,7 @@
 >
 </field>
 <field name="LETTERBOX"
- type="com.caverock.androidsvg.PreserveAspectRatio"
+ type="com.caverock.androidsvg.model.PreserveAspectRatio"
  transient="false"
  volatile="false"
  static="true"
@@ -94,7 +94,7 @@
 >
 </field>
 <field name="START"
- type="com.caverock.androidsvg.PreserveAspectRatio"
+ type="com.caverock.androidsvg.model.PreserveAspectRatio"
  transient="false"
  volatile="false"
  static="true"
@@ -104,7 +104,7 @@
 >
 </field>
 <field name="STRETCH"
- type="com.caverock.androidsvg.PreserveAspectRatio"
+ type="com.caverock.androidsvg.model.PreserveAspectRatio"
  transient="false"
  volatile="false"
  static="true"
@@ -114,7 +114,7 @@
 >
 </field>
 <field name="TOP"
- type="com.caverock.androidsvg.PreserveAspectRatio"
+ type="com.caverock.androidsvg.model.PreserveAspectRatio"
  transient="false"
  volatile="false"
  static="true"
@@ -124,7 +124,7 @@
 >
 </field>
 <field name="UNSCALED"
- type="com.caverock.androidsvg.PreserveAspectRatio"
+ type="com.caverock.androidsvg.model.PreserveAspectRatio"
  transient="false"
  volatile="false"
  static="true"
@@ -143,7 +143,7 @@
  visibility="public"
 >
 <method name="valueOf"
- return="com.caverock.androidsvg.PreserveAspectRatio.Alignment"
+ return="com.caverock.androidsvg.model.PreserveAspectRatio.Alignment"
  abstract="false"
  native="false"
  synchronized="false"
@@ -156,7 +156,7 @@
 </parameter>
 </method>
 <method name="values"
- return="com.caverock.androidsvg.PreserveAspectRatio.Alignment[]"
+ return="com.caverock.androidsvg.model.PreserveAspectRatio.Alignment[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -176,7 +176,7 @@
  visibility="public"
 >
 <method name="valueOf"
- return="com.caverock.androidsvg.PreserveAspectRatio.Scale"
+ return="com.caverock.androidsvg.model.PreserveAspectRatio.Scale"
  abstract="false"
  native="false"
  synchronized="false"
@@ -189,7 +189,7 @@
 </parameter>
 </method>
 <method name="values"
- return="com.caverock.androidsvg.PreserveAspectRatio.Scale[]"
+ return="com.caverock.androidsvg.model.PreserveAspectRatio.Scale[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -242,7 +242,7 @@
 >
 </method>
 <method name="getDocumentPreserveAspectRatio"
- return="com.caverock.androidsvg.PreserveAspectRatio"
+ return="com.caverock.androidsvg.model.PreserveAspectRatio"
  abstract="false"
  native="false"
  synchronized="false"
@@ -297,7 +297,7 @@
 >
 </method>
 <method name="getFromAsset"
- return="com.caverock.androidsvg.SVG"
+ return="com.caverock.androidsvg.androidrendering.SVG"
  abstract="false"
  native="false"
  synchronized="false"
@@ -312,11 +312,11 @@
 </parameter>
 <exception name="IOException" type="java.io.IOException">
 </exception>
-<exception name="SVGParseException" type="com.caverock.androidsvg.SVGParseException">
+<exception name="SVGParseException" type="com.caverock.androidsvg.parser.SVGParseException">
 </exception>
 </method>
 <method name="getFromInputStream"
- return="com.caverock.androidsvg.SVG"
+ return="com.caverock.androidsvg.androidrendering.SVG"
  abstract="false"
  native="false"
  synchronized="false"
@@ -327,11 +327,11 @@
 >
 <parameter name="is" type="java.io.InputStream">
 </parameter>
-<exception name="SVGParseException" type="com.caverock.androidsvg.SVGParseException">
+<exception name="SVGParseException" type="com.caverock.androidsvg.parser.SVGParseException">
 </exception>
 </method>
 <method name="getFromResource"
- return="com.caverock.androidsvg.SVG"
+ return="com.caverock.androidsvg.androidrendering.SVG"
  abstract="false"
  native="false"
  synchronized="false"
@@ -344,11 +344,11 @@
 </parameter>
 <parameter name="resourceId" type="int">
 </parameter>
-<exception name="SVGParseException" type="com.caverock.androidsvg.SVGParseException">
+<exception name="SVGParseException" type="com.caverock.androidsvg.parser.SVGParseException">
 </exception>
 </method>
 <method name="getFromResource"
- return="com.caverock.androidsvg.SVG"
+ return="com.caverock.androidsvg.androidrendering.SVG"
  abstract="false"
  native="false"
  synchronized="false"
@@ -361,11 +361,11 @@
 </parameter>
 <parameter name="resourceId" type="int">
 </parameter>
-<exception name="SVGParseException" type="com.caverock.androidsvg.SVGParseException">
+<exception name="SVGParseException" type="com.caverock.androidsvg.parser.SVGParseException">
 </exception>
 </method>
 <method name="getFromString"
- return="com.caverock.androidsvg.SVG"
+ return="com.caverock.androidsvg.androidrendering.SVG"
  abstract="false"
  native="false"
  synchronized="false"
@@ -376,7 +376,7 @@
 >
 <parameter name="svg" type="java.lang.String">
 </parameter>
-<exception name="SVGParseException" type="com.caverock.androidsvg.SVGParseException">
+<exception name="SVGParseException" type="com.caverock.androidsvg.parser.SVGParseException">
 </exception>
 </method>
 <method name="getRenderDPI"
@@ -422,7 +422,7 @@
  deprecated="not deprecated"
  visibility="public"
 >
-<parameter name="fileResolver" type="com.caverock.androidsvg.SVGExternalFileResolver">
+<parameter name="fileResolver" type="com.caverock.androidsvg.loader.SVGExternalFileResolver">
 </parameter>
 </method>
 <method name="renderToCanvas"
@@ -553,7 +553,7 @@
 >
 <parameter name="value" type="java.lang.String">
 </parameter>
-<exception name="SVGParseException" type="com.caverock.androidsvg.SVGParseException">
+<exception name="SVGParseException" type="com.caverock.androidsvg.parser.SVGParseException">
 </exception>
 </method>
 <method name="setDocumentPreserveAspectRatio"
@@ -566,7 +566,7 @@
  deprecated="not deprecated"
  visibility="public"
 >
-<parameter name="preserveAspectRatio" type="com.caverock.androidsvg.PreserveAspectRatio">
+<parameter name="preserveAspectRatio" type="com.caverock.androidsvg.model.PreserveAspectRatio">
 </parameter>
 </method>
 <method name="setDocumentViewBox"
@@ -613,7 +613,7 @@
 >
 <parameter name="value" type="java.lang.String">
 </parameter>
-<exception name="SVGParseException" type="com.caverock.androidsvg.SVGParseException">
+<exception name="SVGParseException" type="com.caverock.androidsvg.parser.SVGParseException">
 </exception>
 </method>
 <method name="setRenderDPI"
@@ -639,7 +639,7 @@
  visibility="public"
 >
 <method name="valueOf"
- return="com.caverock.androidsvg.SVG.Style.FillRule"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.FillRule"
  abstract="false"
  native="false"
  synchronized="false"
@@ -652,7 +652,7 @@
 </parameter>
 </method>
 <method name="values"
- return="com.caverock.androidsvg.SVG.Style.FillRule[]"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.FillRule[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -672,7 +672,7 @@
  visibility="public"
 >
 <method name="valueOf"
- return="com.caverock.androidsvg.SVG.Style.FontStyle"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.FontStyle"
  abstract="false"
  native="false"
  synchronized="false"
@@ -685,7 +685,7 @@
 </parameter>
 </method>
 <method name="values"
- return="com.caverock.androidsvg.SVG.Style.FontStyle[]"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.FontStyle[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -705,7 +705,7 @@
  visibility="public"
 >
 <method name="valueOf"
- return="com.caverock.androidsvg.SVG.Style.LineCap"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.LineCap"
  abstract="false"
  native="false"
  synchronized="false"
@@ -718,7 +718,7 @@
 </parameter>
 </method>
 <method name="values"
- return="com.caverock.androidsvg.SVG.Style.LineCap[]"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.LineCap[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -738,7 +738,7 @@
  visibility="public"
 >
 <method name="valueOf"
- return="com.caverock.androidsvg.SVG.Style.LineJoin"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.LineJoin"
  abstract="false"
  native="false"
  synchronized="false"
@@ -751,7 +751,7 @@
 </parameter>
 </method>
 <method name="values"
- return="com.caverock.androidsvg.SVG.Style.LineJoin[]"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.LineJoin[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -771,7 +771,7 @@
  visibility="public"
 >
 <method name="valueOf"
- return="com.caverock.androidsvg.SVG.Style.TextAnchor"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.TextAnchor"
  abstract="false"
  native="false"
  synchronized="false"
@@ -784,7 +784,7 @@
 </parameter>
 </method>
 <method name="values"
- return="com.caverock.androidsvg.SVG.Style.TextAnchor[]"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.TextAnchor[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -804,7 +804,7 @@
  visibility="public"
 >
 <method name="valueOf"
- return="com.caverock.androidsvg.SVG.Style.TextDecoration"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.TextDecoration"
  abstract="false"
  native="false"
  synchronized="false"
@@ -817,7 +817,7 @@
 </parameter>
 </method>
 <method name="values"
- return="com.caverock.androidsvg.SVG.Style.TextDecoration[]"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.TextDecoration[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -837,7 +837,7 @@
  visibility="public"
 >
 <method name="valueOf"
- return="com.caverock.androidsvg.SVG.Style.TextDirection"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.TextDirection"
  abstract="false"
  native="false"
  synchronized="false"
@@ -850,7 +850,7 @@
 </parameter>
 </method>
 <method name="values"
- return="com.caverock.androidsvg.SVG.Style.TextDirection[]"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.TextDirection[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -870,7 +870,7 @@
  visibility="public"
 >
 <method name="valueOf"
- return="com.caverock.androidsvg.SVG.Style.VectorEffect"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.VectorEffect"
  abstract="false"
  native="false"
  synchronized="false"
@@ -883,7 +883,7 @@
 </parameter>
 </method>
 <method name="values"
- return="com.caverock.androidsvg.SVG.Style.VectorEffect[]"
+ return="com.caverock.androidsvg.androidrendering.SVG.Style.VectorEffect[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -912,7 +912,7 @@
  visibility="public"
 >
 <constructor name="SVGExternalFileResolver"
- type="com.caverock.androidsvg.SVGExternalFileResolver"
+ type="com.caverock.androidsvg.loader.SVGExternalFileResolver"
  static="false"
  final="false"
  deprecated="not deprecated"
@@ -1030,7 +1030,7 @@
  deprecated="not deprecated"
  visibility="public"
 >
-<parameter name="mysvg" type="com.caverock.androidsvg.SVG">
+<parameter name="mysvg" type="com.caverock.androidsvg.androidrendering.SVG">
 </parameter>
 </method>
 </class>
@@ -1043,7 +1043,7 @@
  visibility="public"
 >
 <constructor name="SVGParseException"
- type="com.caverock.androidsvg.SVGParseException"
+ type="com.caverock.androidsvg.parser.SVGParseException"
  static="false"
  final="false"
  deprecated="not deprecated"
@@ -1053,7 +1053,7 @@
 </parameter>
 </constructor>
 <constructor name="SVGParseException"
- type="com.caverock.androidsvg.SVGParseException"
+ type="com.caverock.androidsvg.parser.SVGParseException"
  static="false"
  final="false"
  deprecated="not deprecated"
@@ -1065,7 +1065,7 @@
 </parameter>
 </constructor>
 <constructor name="SVGParseException"
- type="com.caverock.androidsvg.SVGParseException"
+ type="com.caverock.androidsvg.parser.SVGParseException"
  static="false"
  final="false"
  deprecated="not deprecated"
@@ -1076,7 +1076,7 @@
 </constructor>
 </class>
 <class name="SimpleAssetResolver"
- extends="com.caverock.androidsvg.SVGExternalFileResolver"
+ extends="com.caverock.androidsvg.loader.SVGExternalFileResolver"
  abstract="false"
  static="false"
  final="false"

@@ -98,7 +98,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="http://d.android.com/reference/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>com.caverock.androidsvg.SVG</li>
+<li>com.caverock.androidsvg.androidrendering.SVG</li>
 </ul>
 </li>
 </ul>
@@ -271,7 +271,7 @@ extends <a href="http://d.android.com/reference/java/lang/Object.html?is-externa
 </tr>
 <tr id="i18" class="altColor">
 <td class="colFirst"><code>static void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/SVG.html#registerExternalFileResolver-com.caverock.androidsvg.SVGExternalFileResolver-">registerExternalFileResolver</a></span>(<a href="../../../com/caverock/androidsvg/SVGExternalFileResolver.html" title="class in com.caverock.androidsvg">SVGExternalFileResolver</a>&nbsp;fileResolver)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/SVG.html#registerExternalFileResolver-com.caverock.androidsvg.loader.SVGExternalFileResolver-">registerExternalFileResolver</a></span>(<a href="../../../com/caverock/androidsvg/SVGExternalFileResolver.html" title="class in com.caverock.androidsvg">SVGExternalFileResolver</a>&nbsp;fileResolver)</code>
 <div class="block">Register an <a href="../../../com/caverock/androidsvg/SVGExternalFileResolver.html" title="class in com.caverock.androidsvg"><code>SVGExternalFileResolver</code></a> instance that the renderer should use when resolving
  external references such as images, fonts, and CSS stylesheets.</div>
 </td>
@@ -291,7 +291,7 @@ extends <a href="http://d.android.com/reference/java/lang/Object.html?is-externa
 </tr>
 <tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/SVG.html#renderToCanvas-android.graphics.Canvas-com.caverock.androidsvg.RenderOptions-">renderToCanvas</a></span>(<a href="http://d.android.com/reference/android/graphics/Canvas.html?is-external=true" title="class or interface in android.graphics">Canvas</a>&nbsp;canvas,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/SVG.html#renderToCanvas-android.graphics.Canvas-com.caverock.androidsvg.androidrendering.RenderOptions-">renderToCanvas</a></span>(<a href="http://d.android.com/reference/android/graphics/Canvas.html?is-external=true" title="class or interface in android.graphics">Canvas</a>&nbsp;canvas,
               <a href="../../../com/caverock/androidsvg/RenderOptions.html" title="class in com.caverock.androidsvg">RenderOptions</a>&nbsp;renderOptions)</code>
 <div class="block">Renders this SVG document to a Canvas object.</div>
 </td>
@@ -311,7 +311,7 @@ extends <a href="http://d.android.com/reference/java/lang/Object.html?is-externa
 </tr>
 <tr id="i24" class="altColor">
 <td class="colFirst"><code><a href="http://d.android.com/reference/android/graphics/Picture.html?is-external=true" title="class or interface in android.graphics">Picture</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/SVG.html#renderToPicture-int-int-com.caverock.androidsvg.RenderOptions-">renderToPicture</a></span>(int&nbsp;widthInPixels,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/SVG.html#renderToPicture-int-int-com.caverock.androidsvg.androidrendering.RenderOptions-">renderToPicture</a></span>(int&nbsp;widthInPixels,
                int&nbsp;heightInPixels,
                <a href="../../../com/caverock/androidsvg/RenderOptions.html" title="class in com.caverock.androidsvg">RenderOptions</a>&nbsp;renderOptions)</code>
 <div class="block">Renders this SVG document to a <a href="http://d.android.com/reference/android/graphics/Picture.html?is-external=true" title="class or interface in android.graphics"><code>Picture</code></a>.</div>
@@ -319,7 +319,7 @@ extends <a href="http://d.android.com/reference/java/lang/Object.html?is-externa
 </tr>
 <tr id="i25" class="rowColor">
 <td class="colFirst"><code><a href="http://d.android.com/reference/android/graphics/Picture.html?is-external=true" title="class or interface in android.graphics">Picture</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/SVG.html#renderToPicture-com.caverock.androidsvg.RenderOptions-">renderToPicture</a></span>(<a href="../../../com/caverock/androidsvg/RenderOptions.html" title="class in com.caverock.androidsvg">RenderOptions</a>&nbsp;renderOptions)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/SVG.html#renderToPicture-com.caverock.androidsvg.androidrendering.RenderOptions-">renderToPicture</a></span>(<a href="../../../com/caverock/androidsvg/RenderOptions.html" title="class in com.caverock.androidsvg">RenderOptions</a>&nbsp;renderOptions)</code>
 <div class="block">Renders this SVG document to a <a href="http://d.android.com/reference/android/graphics/Picture.html?is-external=true" title="class or interface in android.graphics"><code>Picture</code></a>.</div>
 </td>
 </tr>
@@ -362,7 +362,7 @@ extends <a href="http://d.android.com/reference/java/lang/Object.html?is-externa
 </tr>
 <tr id="i31" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/SVG.html#setDocumentPreserveAspectRatio-com.caverock.androidsvg.PreserveAspectRatio-">setDocumentPreserveAspectRatio</a></span>(<a href="../../../com/caverock/androidsvg/PreserveAspectRatio.html" title="class in com.caverock.androidsvg">PreserveAspectRatio</a>&nbsp;preserveAspectRatio)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/SVG.html#setDocumentPreserveAspectRatio-com.caverock.androidsvg.model.PreserveAspectRatio-">setDocumentPreserveAspectRatio</a></span>(<a href="../../../com/caverock/androidsvg/PreserveAspectRatio.html" title="class in com.caverock.androidsvg">PreserveAspectRatio</a>&nbsp;preserveAspectRatio)</code>
 <div class="block">Change the document positioning by altering the "preserveAspectRatio"
  attribute of the root <code>&lt;svg&gt;</code> element.</div>
 </td>

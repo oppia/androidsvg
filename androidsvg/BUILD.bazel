@@ -1,11 +1,26 @@
-load("@rules_jvm_external//:defs.bzl", "artifact")
+load("@rules_java//java:defs.bzl", "java_library")
 
 android_library(
     name = "androidsvg",
-    custom_package = "com.caverock.androidsvg",
     srcs = glob(["src/main/java/**/*.java"]),
-    resource_files = glob(["src/main/res/**"]),
-    manifest = "src/main/AndroidManifest.xml",
+    custom_package = "com.caverock.androidsvg",
     exports_manifest = True,
+    manifest = "src/main/AndroidManifest.xml",
+    resource_files = glob(["src/main/res/**"]),
     visibility = ["//visibility:public"],
+    deps = [
+        "//androidsvg/src/main/java/com/caverock/androidsvg/androidrendering",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/loader:svg_external_file_resolver",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/parser:exceptions",
+    ],
+)
+
+java_library(
+    name = "svg_parser",
+    visibility = ["//visibility:public"],
+    exports = [
+        "//androidsvg/src/main/java/com/caverock/androidsvg/parser",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/parser:exceptions",
+        "//androidsvg/src/main/java/com/caverock/androidsvg/xml:java_xml_parsers",
+    ],
 )

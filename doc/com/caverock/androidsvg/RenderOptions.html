@@ -98,7 +98,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="http://d.android.com/reference/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>com.caverock.androidsvg.RenderOptions</li>
+<li>com.caverock.androidsvg.androidrendering.RenderOptions</li>
 </ul>
 </li>
 </ul>
@@ -110,7 +110,7 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">RenderOptions</span>
 extends <a href="http://d.android.com/reference/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
 <div class="block">A fluent builder class that creates a render configuration object for the
- <a href="../../../com/caverock/androidsvg/SVG.html#renderToCanvas-android.graphics.Canvas-com.caverock.androidsvg.RenderOptions-"><code>SVG.renderToCanvas(Canvas,RenderOptions)</code></a> and <a href="../../../com/caverock/androidsvg/SVG.html#renderToPicture-int-int-com.caverock.androidsvg.RenderOptions-"><code>SVG.renderToPicture(int,int,RenderOptions)</code></a> methods.
+ <a href="../../../com/caverock/androidsvg/SVG.html#renderToCanvas-android.graphics.Canvas-com.caverock.androidsvg.androidrendering.RenderOptions-"><code>SVG.renderToCanvas(Canvas,RenderOptions)</code></a> and <a href="../../../com/caverock/androidsvg/SVG.html#renderToPicture-int-int-com.caverock.androidsvg.androidrendering.RenderOptions-"><code>SVG.renderToPicture(int,int,RenderOptions)</code></a> methods.
 
  <h3>Example usage</h3>
 
@@ -148,7 +148,7 @@ extends <a href="http://d.android.com/reference/java/lang/Object.html?is-externa
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/RenderOptions.html#RenderOptions-com.caverock.androidsvg.RenderOptions-">RenderOptions</a></span>(<a href="../../../com/caverock/androidsvg/RenderOptions.html" title="class in com.caverock.androidsvg">RenderOptions</a>&nbsp;other)</code>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/RenderOptions.html#RenderOptions-com.caverock.androidsvg.androidrendering.RenderOptions-">RenderOptions</a></span>(<a href="../../../com/caverock/androidsvg/RenderOptions.html" title="class in com.caverock.androidsvg">RenderOptions</a>&nbsp;other)</code>
 <div class="block">Creates a copy of the given <code>RenderOptions</code> object.</div>
 </td>
 </tr>
@@ -218,7 +218,7 @@ extends <a href="http://d.android.com/reference/java/lang/Object.html?is-externa
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../com/caverock/androidsvg/RenderOptions.html" title="class in com.caverock.androidsvg">RenderOptions</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/RenderOptions.html#preserveAspectRatio-com.caverock.androidsvg.PreserveAspectRatio-">preserveAspectRatio</a></span>(<a href="../../../com/caverock/androidsvg/PreserveAspectRatio.html" title="class in com.caverock.androidsvg">PreserveAspectRatio</a>&nbsp;preserveAspectRatio)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/caverock/androidsvg/RenderOptions.html#preserveAspectRatio-com.caverock.androidsvg.model.PreserveAspectRatio-">preserveAspectRatio</a></span>(<a href="../../../com/caverock/androidsvg/PreserveAspectRatio.html" title="class in com.caverock.androidsvg">PreserveAspectRatio</a>&nbsp;preserveAspectRatio)</code>
 <div class="block">Specifies how the renderer should handle aspect ratio when rendering the SVG.</div>
 </td>
 </tr>
@@ -396,7 +396,7 @@ extends <a href="http://d.android.com/reference/java/lang/Object.html?is-externa
  element is a way to specify a predetermined view of the document, that differs from the default view.
  For example it can allow you to focus in on a small detail of the document.
 
- Note: setting this option will override any <a href="../../../com/caverock/androidsvg/RenderOptions.html#viewBox-float-float-float-float-"><code>viewBox(float,float,float,float)</code></a> or <a href="../../../com/caverock/androidsvg/RenderOptions.html#preserveAspectRatio-com.caverock.androidsvg.PreserveAspectRatio-"><code>preserveAspectRatio(PreserveAspectRatio)</code></a> settings.</div>
+ Note: setting this option will override any <a href="../../../com/caverock/androidsvg/RenderOptions.html#viewBox-float-float-float-float-"><code>viewBox(float,float,float,float)</code></a> or <a href="../../../com/caverock/androidsvg/RenderOptions.html#preserveAspectRatio-com.caverock.androidsvg.model.PreserveAspectRatio-"><code>preserveAspectRatio(PreserveAspectRatio)</code></a> settings.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>viewId</code> - the id attribute of the view that should be used for rendering</dd>

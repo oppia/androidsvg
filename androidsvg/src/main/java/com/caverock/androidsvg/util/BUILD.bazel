@@ -1,0 +1,14 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+android_library(
+    name = "android_logger",
+    srcs = ["AndroidLogger.java"],
+    visibility = ["//visibility:public"],
+    deps = [":logger"],
+)
+
+java_library(
+    name = "logger",
+    srcs = ["Logger.java"],
+    visibility = ["//visibility:public"],
+)

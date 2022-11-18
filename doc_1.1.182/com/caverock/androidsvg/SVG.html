@@ -86,7 +86,7 @@
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>com.caverock.androidsvg.SVG</li>
+<li>com.caverock.androidsvg.androidrendering.SVG</li>
 </ul>
 </li>
 </ul>
@@ -243,7 +243,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="../../../com/caverock/androidsvg/SVG.html#registerExternalFileResolver(com.caverock.androidsvg.SVGExternalFileResolver)">registerExternalFileResolver</a></strong>(<a href="../../../com/caverock/androidsvg/SVGExternalFileResolver.html" title="class in com.caverock.androidsvg">SVGExternalFileResolver</a>&nbsp;fileResolver)</code>
+<td class="colLast"><code><strong><a href="../../../com/caverock/androidsvg/SVG.html#registerExternalFileResolver(com.caverock.androidsvg.loader.SVGExternalFileResolver)">registerExternalFileResolver</a></strong>(<a href="../../../com/caverock/androidsvg/SVGExternalFileResolver.html" title="class in com.caverock.androidsvg">SVGExternalFileResolver</a>&nbsp;fileResolver)</code>
 <div class="block">Register an <a href="../../../com/caverock/androidsvg/SVGExternalFileResolver.html" title="class in com.caverock.androidsvg"><code>SVGExternalFileResolver</code></a> instance that the renderer should use when resolving
  external references such as images and fonts.</div>
 </td>
@@ -263,7 +263,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="../../../com/caverock/androidsvg/SVG.html#renderToCanvas(android.graphics.Canvas, android.graphics.RectF, float, com.caverock.androidsvg.SVG.AspectRatioAlignment, com.caverock.androidsvg.SVG.AspectRatioScale)">renderToCanvas</a></strong>(android.graphics.Canvas&nbsp;canvas,
+<td class="colLast"><code><strong><a href="../../../com/caverock/androidsvg/SVG.html#renderToCanvas(android.graphics.Canvas, android.graphics.RectF, float, com.caverock.androidsvg.androidrendering.SVG.AspectRatioAlignment, com.caverock.androidsvg.androidrendering.SVG.AspectRatioScale)">renderToCanvas</a></strong>(android.graphics.Canvas&nbsp;canvas,
               android.graphics.RectF&nbsp;viewPort,
               float&nbsp;defaultDPI,
               <a href="../../../com/caverock/androidsvg/SVG.AspectRatioAlignment.html" title="enum in com.caverock.androidsvg">SVG.AspectRatioAlignment</a>&nbsp;alignment,
@@ -286,7 +286,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>android.graphics.Picture</code></td>
-<td class="colLast"><code><strong><a href="../../../com/caverock/androidsvg/SVG.html#renderToPicture(int, int, float, com.caverock.androidsvg.SVG.AspectRatioAlignment, com.caverock.androidsvg.SVG.AspectRatioScale)">renderToPicture</a></strong>(int&nbsp;widthInPixels,
+<td class="colLast"><code><strong><a href="../../../com/caverock/androidsvg/SVG.html#renderToPicture(int, int, float, com.caverock.androidsvg.androidrendering.SVG.AspectRatioAlignment, com.caverock.androidsvg.androidrendering.SVG.AspectRatioScale)">renderToPicture</a></strong>(int&nbsp;widthInPixels,
                int&nbsp;heightInPixels,
                float&nbsp;defaultDPI,
                <a href="../../../com/caverock/androidsvg/SVG.AspectRatioAlignment.html" title="enum in com.caverock.androidsvg">SVG.AspectRatioAlignment</a>&nbsp;alignment,
@@ -460,7 +460,7 @@ extends java.lang.Object</pre>
 <dt><span class="strong">Returns:</span></dt><dd>a Picture object suitable for later rendering using <code>Canvas.darwPicture()</code></dd></dl>
 </li>
 </ul>
-<a name="renderToPicture(int, int, float, com.caverock.androidsvg.SVG.AspectRatioAlignment, com.caverock.androidsvg.SVG.AspectRatioScale)">
+<a name="renderToPicture(int, int, float, com.caverock.androidsvg.androidrendering.SVG.AspectRatioAlignment, com.caverock.androidsvg.androidrendering.SVG.AspectRatioScale)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -538,7 +538,7 @@ extends java.lang.Object</pre>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>canvas</code> - the canvas to which the document should be rendered.</dd><dd><code>viewPort</code> - the bounds of the area on the canvas you want the SVG rendered, or null for the whole canvas.</dd></dl>
 </li>
 </ul>
-<a name="renderToCanvas(android.graphics.Canvas, android.graphics.RectF, float, com.caverock.androidsvg.SVG.AspectRatioAlignment, com.caverock.androidsvg.SVG.AspectRatioScale)">
+<a name="renderToCanvas(android.graphics.Canvas, android.graphics.RectF, float, com.caverock.androidsvg.androidrendering.SVG.AspectRatioAlignment, com.caverock.androidsvg.androidrendering.SVG.AspectRatioScale)">
 <!--   -->
 </a>
 <ul class="blockList">
