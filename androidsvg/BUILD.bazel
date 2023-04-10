@@ -2,16 +2,19 @@ load("@rules_java//java:defs.bzl", "java_library")
 
 android_library(
     name = "androidsvg",
-    srcs = glob(["src/main/java/**/*.java"]),
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/SimpleAssetResolver.java",
+        "src/main/java/com/caverock/androidsvg/SVGImageView.java",
+    ],
     custom_package = "com.caverock.androidsvg",
     exports_manifest = True,
     manifest = "src/main/AndroidManifest.xml",
     resource_files = glob(["src/main/res/**"]),
     visibility = ["//visibility:public"],
     deps = [
-        "//androidsvg/src/main/java/com/caverock/androidsvg/androidrendering",
-        "//androidsvg/src/main/java/com/caverock/androidsvg/loader:svg_external_file_resolver",
-        "//androidsvg/src/main/java/com/caverock/androidsvg/parser:exceptions",
+        ":androidrendering",
+        ":svg_external_file_resolver",
+        ":exceptions",
     ],
 )
 
@@ -19,8 +22,251 @@ java_library(
     name = "svg_parser",
     visibility = ["//visibility:public"],
     exports = [
-        "//androidsvg/src/main/java/com/caverock/androidsvg/parser",
-        "//androidsvg/src/main/java/com/caverock/androidsvg/parser:exceptions",
-        "//androidsvg/src/main/java/com/caverock/androidsvg/xml:java_xml_parsers",
+        ":parser",
+        ":exceptions",
+        ":java_xml_parsers",
     ],
 )
+
+android_library(
+    name = "androidrendering",
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/androidrendering/CanvasLegacy.java",
+        "src/main/java/com/caverock/androidsvg/androidrendering/RenderOptions.java",
+        "src/main/java/com/caverock/androidsvg/androidrendering/RenderOptionsBase.java",
+        "src/main/java/com/caverock/androidsvg/androidrendering/SVG.java",
+        "src/main/java/com/caverock/androidsvg/androidrendering/SVGAndroidRenderer.java",
+        "src/main/java/com/caverock/androidsvg/androidrendering/SvgRenderingBase.java",
+    ],
+    deps = [
+        ":svg_external_file_resolver",
+        ":model",
+        ":parser",
+        ":exceptions",
+        ":parser_helper",
+        ":android_logger",
+        ":logger",
+        ":android_xml_parsers",
+    ],
+)
+
+java_library(
+    name = "css_resolver",
+    srcs = ["src/main/java/com/caverock/androidsvg/loader/CssResolver.java"],
+)
+
+android_library(
+    name = "svg_external_file_resolver",
+    srcs = ["src/main/java/com/caverock/androidsvg/loader/SVGExternalFileResolver.java"],
+    deps = [":css_resolver"],
+)
+
+java_library(
+    name = "model",
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/model/A.java",
+        "src/main/java/com/caverock/androidsvg/model/Attrib.java",
+        "src/main/java/com/caverock/androidsvg/model/AttribOp.java",
+        "src/main/java/com/caverock/androidsvg/model/Box.java",
+        "src/main/java/com/caverock/androidsvg/model/CSSClipRect.java",
+        "src/main/java/com/caverock/androidsvg/model/CSSFontFeatureSettings.java",
+        "src/main/java/com/caverock/androidsvg/model/CSSFontVariationSettings.java",
+        "src/main/java/com/caverock/androidsvg/model/Circle.java",
+        "src/main/java/com/caverock/androidsvg/model/ClipPath.java",
+        "src/main/java/com/caverock/androidsvg/model/Colour.java",
+        "src/main/java/com/caverock/androidsvg/model/Combinator.java",
+        "src/main/java/com/caverock/androidsvg/model/CurrentColor.java",
+        "src/main/java/com/caverock/androidsvg/model/Defs.java",
+        "src/main/java/com/caverock/androidsvg/model/Ellipse.java",
+        "src/main/java/com/caverock/androidsvg/model/GradientElement.java",
+        "src/main/java/com/caverock/androidsvg/model/GradientSpread.java",
+        "src/main/java/com/caverock/androidsvg/model/GraphicsElement.java",
+        "src/main/java/com/caverock/androidsvg/model/Group.java",
+        "src/main/java/com/caverock/androidsvg/model/HasTransform.java",
+        "src/main/java/com/caverock/androidsvg/model/Image.java",
+        "src/main/java/com/caverock/androidsvg/model/Length.java",
+        "src/main/java/com/caverock/androidsvg/model/Line.java",
+        "src/main/java/com/caverock/androidsvg/model/Marker.java",
+        "src/main/java/com/caverock/androidsvg/model/Mask.java",
+        "src/main/java/com/caverock/androidsvg/model/Matrix.java",
+        "src/main/java/com/caverock/androidsvg/model/NotDirectlyRendered.java",
+        "src/main/java/com/caverock/androidsvg/model/PaintReference.java",
+        "src/main/java/com/caverock/androidsvg/model/Path.java",
+        "src/main/java/com/caverock/androidsvg/model/PathDefinition.java",
+        "src/main/java/com/caverock/androidsvg/model/PathInterface.java",
+        "src/main/java/com/caverock/androidsvg/model/Pattern.java",
+        "src/main/java/com/caverock/androidsvg/model/PolyLine.java",
+        "src/main/java/com/caverock/androidsvg/model/Polygon.java",
+        "src/main/java/com/caverock/androidsvg/model/PreserveAspectRatio.java",
+        "src/main/java/com/caverock/androidsvg/model/PseudoClass.java",
+        "src/main/java/com/caverock/androidsvg/model/PseudoClassIdents.java",
+        "src/main/java/com/caverock/androidsvg/model/Rect.java",
+        "src/main/java/com/caverock/androidsvg/model/Rule.java",
+        "src/main/java/com/caverock/androidsvg/model/RuleMatchContext.java",
+        "src/main/java/com/caverock/androidsvg/model/Ruleset.java",
+        "src/main/java/com/caverock/androidsvg/model/Selector.java",
+        "src/main/java/com/caverock/androidsvg/model/SimpleSelector.java",
+        "src/main/java/com/caverock/androidsvg/model/SolidColor.java",
+        "src/main/java/com/caverock/androidsvg/model/Source.java",
+        "src/main/java/com/caverock/androidsvg/model/Stop.java",
+        "src/main/java/com/caverock/androidsvg/model/Style.java",
+        "src/main/java/com/caverock/androidsvg/model/Svg.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgConditional.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgConditionalContainer.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgConditionalElement.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgContainer.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgElement.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgElementBase.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgLinearGradient.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgObject.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgPaint.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgPreserveAspectRatioContainer.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgRadialGradient.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgStructure.java",
+        "src/main/java/com/caverock/androidsvg/model/SvgViewBoxContainer.java",
+        "src/main/java/com/caverock/androidsvg/model/Switch.java",
+        "src/main/java/com/caverock/androidsvg/model/Symbol.java",
+        "src/main/java/com/caverock/androidsvg/model/TRef.java",
+        "src/main/java/com/caverock/androidsvg/model/TSpan.java",
+        "src/main/java/com/caverock/androidsvg/model/Text.java",
+        "src/main/java/com/caverock/androidsvg/model/TextChild.java",
+        "src/main/java/com/caverock/androidsvg/model/TextContainer.java",
+        "src/main/java/com/caverock/androidsvg/model/TextPath.java",
+        "src/main/java/com/caverock/androidsvg/model/TextPositionedContainer.java",
+        "src/main/java/com/caverock/androidsvg/model/TextRoot.java",
+        "src/main/java/com/caverock/androidsvg/model/TextSequence.java",
+        "src/main/java/com/caverock/androidsvg/model/Unit.java",
+        "src/main/java/com/caverock/androidsvg/model/Use.java",
+        "src/main/java/com/caverock/androidsvg/model/View.java",
+    ],
+    deps = [
+        ":css_resolver",
+        ":exceptions",
+    ],
+)
+
+java_library(
+    name = "parser",
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/parser/SVGParser.java",
+        "src/main/java/com/caverock/androidsvg/parser/SVGParserFactoryImpl.java",
+        "src/main/java/com/caverock/androidsvg/parser/SVGParserImpl.java",
+    ],
+    deps = [
+        ":exceptions",
+        ":integer_parser",
+        ":number_parser",
+        ":parser_helper",
+        ":text_scanner",
+        ":css_resolver",
+        ":model",
+        ":logger",
+        ":xml_parser",
+    ],
+)
+
+java_library(
+    name = "parser_helper",
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/parser/CSSParser.java",
+        "src/main/java/com/caverock/androidsvg/parser/CSSTextScanner.java",
+        "src/main/java/com/caverock/androidsvg/parser/ParserHelper.java",
+    ],
+    deps = [
+        ":exceptions",
+        ":integer_parser",
+        ":number_parser",
+        ":text_scanner",
+        ":css_resolver",
+        ":model",
+        ":logger",
+    ],
+)
+
+java_library(
+    name = "text_scanner",
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/parser/TextScanner.java",
+    ],
+    deps = [
+        ":integer_parser",
+        ":number_parser",
+        ":model",
+    ],
+)
+
+java_library(
+    name = "integer_parser",
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/parser/IntegerParser.java",
+    ],
+    deps = [
+        ":model",
+    ],
+)
+
+java_library(
+    name = "number_parser",
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/parser/NumberParser.java",
+    ],
+    deps = [
+        ":model",
+    ],
+)
+
+java_library(
+    name = "exceptions",
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/parser/CSSParseException.java",
+        "src/main/java/com/caverock/androidsvg/parser/SVGParseException.java",
+    ],
+)
+
+android_library(
+    name = "android_logger",
+    srcs = ["src/main/java/com/caverock/androidsvg/util/AndroidLogger.java"],
+    deps = [":logger"],
+)
+
+java_library(
+    name = "logger",
+    srcs = ["src/main/java/com/caverock/androidsvg/util/Logger.java"],
+)
+
+java_library(
+    name = "xml_parser",
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/xml/XmlDocumentHandler.java",
+        "src/main/java/com/caverock/androidsvg/xml/XmlParser.java",
+    ],
+    deps = [":exceptions"],
+)
+
+android_library(
+    name = "android_xml_parsers",
+    srcs = [
+        "src/main/java/com/caverock/androidsvg/xml/AutomaticAndroidXmlParser.java",
+        "src/main/java/com/caverock/androidsvg/xml/PullXmlParser.java",
+    ],
+    deps = [
+        ":java_xml_parsers",
+        ":xml_parser",
+        ":exceptions",
+        ":parser_helper",
+        ":text_scanner",
+        ":logger",
+    ],
+)
+
+java_library(
+    name = "java_xml_parsers",
+    srcs = ["src/main/java/com/caverock/androidsvg/xml/SaxXmlParser.java"],
+    deps = [
+        ":xml_parser",
+        ":exceptions",
+        ":parser_helper",
+        ":text_scanner",
+    ],
+)
+
