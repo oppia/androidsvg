@@ -1,7 +1,9 @@
 package com.caverock.androidsvg.model;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class CSSFontVariationSettings
@@ -17,6 +19,8 @@ public class CSSFontVariationSettings
 
    public static final Float  VARIATION_ITALIC_VALUE_ON = 1f;
    public static final Float  VARIATION_OBLIQUE_VALUE_ON = -14f;  // -14 degrees
+
+   private static final NumberFormat NUMBER_FORMATTER = createNumberFormatter();
 
    public CSSFontVariationSettings()
    {
@@ -58,8 +62,25 @@ public class CSSFontVariationSettings
          sb.append(entry.getKey());
          sb.append("' ");
          DecimalFormat format = new DecimalFormat("#.##");
-         sb.append(format.format(entry.getValue()));
+         sb.append(NUMBER_FORMATTER.format(entry.getValue()));
       }
       return sb.toString();
+   }
+
+   private static final NumberFormat createNumberFormatter() {
+      // Use the US locale for strong consistency in number-only formatting for high confidence in
+      // the parsability of formatted values.
+      NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
+
+      // NumberFormat's factories should generally be used instead of directly instantiating a
+      // DecimalFormat (per documentation). Also, the Locale must be fixed because this is producing
+      // a string that will be parsed so non-Hindi-Arabic numerals won't work for such times when
+      // the default Locale is changed to use one of those numeral types for formatting (such as
+      // eastern Arabic numerals).
+      if (formatter instanceof DecimalFormat) {
+         ((DecimalFormat) formatter).applyPattern("#.##");
+      }
+
+      return formatter;
    }
 }
